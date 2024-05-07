@@ -12,8 +12,8 @@ A simple ASI loader that supports loading ScriptHookV mods online
 
 That's it. You can now download an asi script such as [VStancer](https://www.gta5-mods.com/scripts/vstancer) and run the game to test it.
 
-> Despite its name, YimAsi doesn't need YimMenu to work. You only need the two dlls.
+> Despite its name, YimASI doesn't need YimMenu to work. You only need the two dlls.
 
 # Credits: 
 
-[maybegreat48](https://github.com/maybegreat48) created YimAsi. I only built it and explained how it works.
+[maybegreat48](https://github.com/maybegreat48) created YimASI. I only built it and explained how to make it work.
