@@ -33,7 +33,7 @@ jobs:
       with:
         name: binary
         path: |
-          build/WTSAPI32.dll
+          build\Release\WTSAPI32.dll
           
     - name: Generate Build Info
       id: var
