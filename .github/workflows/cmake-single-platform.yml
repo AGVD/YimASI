@@ -47,7 +47,7 @@ jobs:
     name: Create Release
     needs: build
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v4
     - name: Delete Existing Release
       id: delete_ex_release
       uses: actions/github-script@v7
