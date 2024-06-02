@@ -28,8 +28,88 @@ jobs:
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
-    - name: Upload Release
-      uses: softprops/action-gh-release@v2
-      if: startsWith(github.ref, 'refs/tags/')
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
       with:
-          files: WTSAPI32.dll
+        name: binary
+        path: |
+          build/WTSAPI32.dll
+          
+    - name: Generate Build Info
+      id: var
+      run: |
+        echo "full_sha=$(git rev-parse HEAD)" >> $env:GITHUB_OUTPUT
+        echo "short_sha=$(git rev-parse --short HEAD)" >> $env:GITHUB_OUTPUT
+
+  create_release:
+  
+    runs-on: ubuntu-latest
+    name: Create Release
+    needs: build
+    steps:
+    - uses: actions/checkout@v5
+    - name: Delete Existing Release
+      id: delete_ex_release
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const owner = context.repo.owner;
+          const repo = context.repo.repo;
+          const tag = "release";
+      
+            // List all releases and find the release by tag
+            const releases = await github.rest.repos.listReleases({
+              owner: owner,
+              repo: repo,
+            });
+      
+            const release = releases.data.find(release => release.tag_name === tag);
+      
+            // Check if the release exists and delete it
+            if (release) {
+              await github.rest.repos.deleteRelease({
+                owner: owner,
+                repo: repo,
+                release_id: release.id,
+              });
+              console.log(`Deleted release with ID ${release.id}`);
+            } else {
+              console.log("No existing release to delete");
+            }
+      
+            // Delete the tag
+            try {
+              await github.rest.git.deleteRef({
+                owner: owner,
+                repo: repo,
+                ref: `tags/${tag}`,
+              });
+              console.log(`Deleted tag ${tag}`);
+            } catch (error) {
+              console.error(`Error deleting tag: ${error.message}`);
+            }
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: binary
+
+    - name: Echo build sha256
+      id: build_sha
+      run: |
+        sha256sum WTSAPI32.dll > sha256.checksum
+        echo "build_sha=$(cat sha256.checksum)" >> $GITHUB_OUTPUT
+        cat sha256.checksum
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: YimASI
+        tag_name: release
+        body: |
+            **This release has been built by Github Actions**
+            
+            [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+        files: |
+          WTSAPI32.dll
+          
