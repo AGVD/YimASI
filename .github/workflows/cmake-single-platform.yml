@@ -4,11 +4,7 @@ name: CMake on a single platform
 
 
 
-on: 
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [workflow_dispatch]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
