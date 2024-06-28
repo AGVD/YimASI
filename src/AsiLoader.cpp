@@ -6,7 +6,7 @@ namespace NewBase
 {
 	void AsiLoader::Init()
 	{
-		if (LoadLibraryW(L"ScriptHookV.dll"))
+		if (LoadLibraryW(L"ScriptHookRDR2.dll"))
 			Pointers.InitScriptHook();
 
 		for (auto& entry : std::filesystem::recursive_directory_iterator(std::filesystem::current_path()))
