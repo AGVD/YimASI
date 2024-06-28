@@ -41,7 +41,7 @@ namespace NewBase
 	void Hijack::Init(std::function<void()> main_func)
 	{
 		m_MainFunc = main_func;
-		m_Hook = std::make_unique<IATHook<decltype(&SpinCountHookTarget)>>("HijackHook", ModuleMgr::Get("GTA5.exe"_J), "KERNEL32.dll", "InitializeCriticalSectionAndSpinCount", &SpinCountHookTarget);
+		m_Hook = std::make_unique<IATHook<decltype(&SpinCountHookTarget)>>("HijackHook", ModuleMgr::Get("ScriptHookRDR2.exe"_J), "KERNEL32.dll", "InitializeCriticalSectionAndSpinCount", &SpinCountHookTarget);
 		m_Hook->Enable();
 		LoadOriginalImports();
 	}
