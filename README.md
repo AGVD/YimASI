@@ -12,10 +12,7 @@ A simple ASI loader that supports loading ScriptHookV mods online
 That's it. You can now download an asi script such as [VStancer](https://www.gta5-mods.com/scripts/vstancer) and run the game to test it.
 
 > Despite its name, YimASI doesn't need YimMenu to work. You only need the two dlls.
+> If you're using heavy mods like NVE and your game crashes, install [Packfile Limit Adjuster](https://www.gta5-mods.com/tools/packfile-limit-adjuster)
 
 # Credits: 
-
 [maybegreat48](https://github.com/maybegreat48) created YimASI. I only built it and explained how to make it work.
-=======
-If you're using heavy mods like NVE and your game crashes, install [Packfile Limit Adjuster](https://www.gta5-mods.com/tools/packfile-limit-adjuster)
->>>>>>> e326d01278bf9333331b4ccc1bfee9cd3d08f0c0
