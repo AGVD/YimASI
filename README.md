@@ -2,8 +2,6 @@
 
 A simple ASI loader that supports loading ScriptHookV mods online
 
-<<<<<<< HEAD
-
 # Usage
 
 1. Go to the [releases](https://github.com/xesdoog/YimASI/releases/tag/release) section and download **WTSAPI32.dll**.
