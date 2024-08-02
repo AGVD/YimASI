@@ -48,6 +48,11 @@ namespace NewBase
 			m_GetPoolItem = ptr.As<PVOID>();
 		});
 
+		constexpr auto setBadPackOrder = Pattern<"80 8F 82 01 00 00 04">("SetBadPackOrder");
+		scanner.Add(setBadPackOrder, [this](PointerCalculator ptr) {
+			memset(ptr.As<PVOID>(), 0x90, 7);
+		});
+
 		if (!scanner.Scan())
 		{
 			LOG(FATAL) << "Some patterns could not be found, unloading.";
