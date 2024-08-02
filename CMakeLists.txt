@@ -40,9 +40,3 @@ if(MSVC)
   set(CMAKE_EXE_LINKER_FLAGS
       "${CMAKE_EXE_LINKER_FLAGS} /DEF:${SRC_DIR}/exports.def")
 endif()
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD 
-  COMMAND "${CMAKE_COMMAND}" -E copy 
-     "$<TARGET_FILE:${PROJECT_NAME}>"
-     "C:\\Games\\GTAV" 
-  COMMENT "Copying to output directory")
